@@ -1,0 +1,37 @@
+[req]
+default_bits        = 2048
+default_md          = sha256
+encrypt_key         = no
+distinguished_name  = subject
+req_extensions      = req_ext
+x509_extensions     = x509_ext
+string_mask         = utf8only
+prompt              = no
+
+[subject]
+countryName         = AU
+stateOrProvinceName = Some-State
+organizationName    = Internet Widgits Pty Ltd
+
+commonName          = Example Entity
+
+[x509_ext]
+subjectKeyIdentifier   = hash
+authorityKeyIdentifier = keyid:always,issuer
+
+basicConstraints = critical, CA:FALSE
+keyUsage         = critical, digitalSignature, keyEncipherment, cRLSign, keyCertSign
+subjectAltName   = @alt_names
+extendedKeyUsage = serverAuth
+
+extendedKeyUsage = TLS Web Server Authentication
+
+[req_ext]
+subjectKeyIdentifier = hash
+basicConstraints     = CA:FALSE
+keyUsage             = digitalSignature, keyEncipherment
+subjectAltName       = @alt_names
+nsComment            = "OpenSSL Generated Certificate"
+
+[alt_names]
+DNS.1 = example-entity.local
